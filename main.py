@@ -106,8 +106,7 @@ best_acc = 0
 total_steps = 0
 flag = 0
 label_embed = torch.tensor([])
-# print('Whether mix: ', args.mix_option)
-# print("Mix layers sets: ", args.mix_layers_set)
+
 mem_threshold = torch.tensor([])
 
 
@@ -294,7 +293,7 @@ def train(labeled_trainloader, unlabeled_trainloader, model, optimizer, epoch, n
         with torch.no_grad():
             outputs_ori, sup_emb = model(inputs_ori)
         sup_loss = torch.mean(torch.sum(-torch.log(outputs_x + 1e-8) * targets_x, 1)) \
-                       + torch.mean(torch.max(-torch.log(1 - outputs_x + 1e-8) * (1 - targets_x), 1)[0]) ##运行yahooSSHI
+                       + torch.mean(torch.max(-torch.log(1 - outputs_x + 1e-8) * (1 - targets_x), 1)[0]) 
         # sup_loss = class_criterion(outputs_x, targets_x)
         # unsup_loss = class_criterion(outputs_u, outputs_ori.clone().detach())
         # unsup_loss = 0.5 * class_criterion(outputs_u, outputs_ori.clone().detach()) + 0.5 * class_criterion(outputs_u2,\
